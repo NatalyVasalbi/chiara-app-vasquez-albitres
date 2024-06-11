@@ -1,85 +1,44 @@
-import { useState } from 'react';
-import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
-import { Menu, Flex } from 'antd';
-import CartWidget from '../cart-widget/CartWidget';
-import './Navbar.css'
+import { useState } from 'react'
+import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons'
+import { Menu, Flex, Typography  } from 'antd'
+import CartWidget from '../CartWidget/CartWidget'
+import './NavBar.css'
+import { Link } from 'react-router-dom'
+const { Title } = Typography
 const items = [
   {
-    label: 'NEW IN',
-    key: 'mail',
-    icon: <MailOutlined />,
-  },
-  {
-    label: 'HOME',
-    key: 'home',
-    icon: <AppstoreOutlined />,
-    disabled: true,
-  },
-  {
-    label: 'BASICOS',
-    key: 'basicos',
-    icon: <SettingOutlined />,
-    children: [
-      {
-        type: 'group',
-        label: 'Item 1',
-        children: [
-          {
-            label: 'Option 1',
-            key: 'setting:1',
-          },
-          {
-            label: 'Option 2',
-            key: 'setting:2',
-          },
-        ],
-      },
-      {
-        type: 'group',
-        label: 'Item 2',
-        children: [
-          {
-            label: 'Option 3',
-            key: 'setting:3',
-          },
-          {
-            label: 'Option 4',
-            key: 'setting:4',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    key: 'blusas-tops',
     label: (
-      <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
-        BLUSAS Y TOPS
-      </a>
+      <Link to='/'>HOME</Link>
+    ),
+    key: 'home',
+    icon: <AppstoreOutlined />
+  },
+  {
+    label: (
+      <Link to='/category/new'>NEW IN</Link>
+    ),
+    key: 'new'
+  },
+  {
+    label: (
+      <Link to='/category/basics'>BASICS</Link>
+    ),
+    key: 'basics'
+  },
+  {
+    key: 'pants',
+    label: (
+      <Link to='/category/pants'>PANTS</Link>
     ),
   },
   {
-    key: 'sets',
-    label: 'COMFY SETS'
-  },
-  {
-    key: 'pantalones',
-    label: 'PANTALONES'
-  },
-  {
-    key: 'complementos',
-    label: 'COMPLEMENTOS'
-  },
-  {
-    key: 'sale',
-    label: 'SALE'
-  },
-  {
-    key: 'ultimas',
-    label: 'ULTIMAS EN STOCK'
+    key: 'complements',
+    label: (
+      <Link to='/category/complements'>COMPLEMENTS</Link>
+    ),
   }
 ];
-const Navbar = () => {
+const NavBar = () => {
   const [current, setCurrent] = useState('mail');
   const onClick = (e) => {
     console.log('click ', e);
@@ -87,11 +46,13 @@ const Navbar = () => {
   };
   return (
     <><div>
-          <h1>CHIARA LUNA</h1>
+        <Title>
+          <Link to={'/'}>CHIARA LUNA</Link>
+        </Title>
       </div>
       <Flex gap="middle" ><Menu className="menu" value="horizontal" onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />
       <CartWidget value="horizontal" /> </Flex></>
   )
   
 }
-export default Navbar
+export default NavBar
