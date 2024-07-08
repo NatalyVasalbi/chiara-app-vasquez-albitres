@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import ItemDetail from '../ItemDetail/ItemDetail'
 import { useParams } from 'react-router-dom'
 import { getItemById } from '../../data/asyncmock'
+import { Spin } from 'antd'
 
 const ItemDetailContainer = () => {
     const [item, setItem] = useState()
@@ -15,7 +16,7 @@ const ItemDetailContainer = () => {
 
   return (
     <>
-        { item ? <ItemDetail item={item}/> : <div>Cargando...</div> }
+        { item ? <ItemDetail item={item}/> : <Spin/> }
     </>
   )
 }

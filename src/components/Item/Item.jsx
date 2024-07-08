@@ -1,3 +1,4 @@
+import React from 'react'
 import { Card } from 'antd'
 import { Link } from 'react-router-dom'
 const { Meta } = Card;
@@ -18,7 +19,12 @@ const Item = ({item}) => {
         >
         <Meta
             title={item.name} 
-            description={item.description}
+            description= {
+              <>
+                <p>Descripción: {item.description}</p>
+                <p>Precio: S/ {item.price}</p>
+              </>
+            }
         />
     </Card>
   )

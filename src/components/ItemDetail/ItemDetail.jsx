@@ -1,37 +1,27 @@
-import { Card, Descriptions, Flex } from 'antd'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useRef, useState } from 'react'
+import { Button, Card, Flex } from 'antd'
+import AddItemButton from '../AddItemButton/AddItemButton';
+import ItemQuantitySelector from '../ItemQuantitySelector/ItemQuantitySelector';
+import Description from '../Description/Description';
+import { Link } from 'react-router-dom';
 import './ItemDetail.css'
 const { Meta } = Card;
 
 const ItemDetail = ({item}) => {
+  const [ itemState, setItemState ] = useState({})
+  const quantityRef = useRef(1)
+  const handleUpdateQuantity = (value) => {
+    quantityRef.current = value
+    return quantityRef.current
+  }
 
-  const itemDetail = [
-    {
-      key: '1',
-      label: 'Nombre',
-      children: item.name,
-    },
-    {
-      key: '2',
-      label: 'Categoria',
-      children: item.category,
-    },    
-    {
-      key: '3',
-      label: 'Descripción',
-      children: item.description,
-    },
-    {
-      key: '4',
-      label: 'Precio',
-      children: item.price,
-    },
-    {
-      key: '5',
-      label: 'Stock',
-      children: item.stock,
-    }
-  ]
+  useEffect(() => {
+    setItemState(item)
+  }, [])
+
+  const getItemQuantity = () => {
+    return quantityRef.current
+  }
 
   return (
     <>
@@ -41,20 +31,23 @@ const ItemDetail = ({item}) => {
           cover={
             <img
               alt="example"
-              src={item.img}
+              src={itemState.img}
             />
           }
           actions={[
-            <div>Agregar al carrito</div>,
-            <Link to='/'>Volver</Link>
+            <ItemQuantitySelector handleUpdateQuantity={handleUpdateQuantity} />,
+            <AddItemButton setItemState={setItemState} item={itemState} getItemQuantity={getItemQuantity}/>
           ]}
         >
           <Meta
-            title={item.name}
-            description={item.description}
+            title={itemState.name}
+            description={itemState.description}
           />
         </Card>
-        <Descriptions title="Detalle" items={itemDetail} className='description'/>
+        <Flex vertical gap={'large'}>
+          <Description item={item} />
+          {itemState?.quantity > 0 ? <Link to={'/cart'}><Button type="primary">Finalizar compra</Button></Link> : <></>}
+        </Flex>
       </Flex>
     </>
   )
