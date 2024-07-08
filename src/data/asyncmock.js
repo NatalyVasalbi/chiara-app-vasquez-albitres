@@ -2,7 +2,7 @@ const itemsList = [
     {
         id: 1,
         category: "new",
-        description: "La polera perfecta para este invierno llegó a CL ¡El fit te encantará! 💓 Y la tela es atemporal, así que podrá acompañarte en los días fríos y en tus tardes de verano.",
+        description: "La poolera perfecta para este invierno llegó a CL ¡El fit te encantará! 💓 Y la tela es atemporal, así que podrá acompañarte en los días fríos y en tus tardes de verano.",
         img: "https://www.almarosa.shop/wp-content/uploads/2024/05/Polera-oversized-Gris-2.png",
         name: "Polera oversized gris",
         price: 109,
